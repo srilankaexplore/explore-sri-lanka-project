@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<!--
+  Explore Sri Lanka – Culture & Food Page
+  File   : culture-food.html
+  Author : Web Design Assignment
+  Desc   : Tabs (desktop) and Accordion (mobile) covering Festivals,
+           Traditions, Food, Tea Culture, and Hospitality.
+           Tab/accordion toggling is jQuery-powered (jquery-effects.js).
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover Sri Lankan culture, festivals, traditions, food, tea heritage, and the legendary warmth of Sri Lankan hospitality.">
+  <title>Culture &amp; Food | Explore Sri Lanka – Travel &amp; Culture Guide</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plh7eecS6FHlvA2LZQC8zHAREuCkg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Extra page-specific styles */
+    .content-with-image {
+      display: grid;
+      gap: var(--space-xl);
+      grid-template-columns: 1fr;
+      align-items: start;
+    }
+    @media (min-width: 768px) {
+      .content-with-image { grid-template-columns: 1fr 1fr; }
+      .content-with-image.reverse > *:first-child { order: 2; }
+      .content-with-image.reverse > *:last-child  { order: 1; }
+    }
+    .highlight-box {
+      background: var(--clr-beige);
+      border-left: 4px solid var(--clr-gold);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: var(--space-lg);
+      margin: var(--space-lg) 0;
+    }
+    .highlight-box p { margin: 0; font-style: italic; color: var(--clr-text-light); }
+    .tea-steps {
+      display: grid;
+      gap: var(--space-lg);
+      grid-template-columns: 1fr;
+      counter-reset: tea-step;
+    }
+    @media (min-width: 768px) { .tea-steps { grid-template-columns: repeat(3, 1fr); } }
+    .tea-step {
+      text-align: center;
+      padding: var(--space-xl) var(--space-md);
+      background: var(--clr-white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .tea-step::before {
+      counter-increment: tea-step;
+      content: counter(tea-step);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--clr-green);
+      color: white;
+      font-weight: 700;
+      font-size: var(--fs-sm);
+      margin-bottom: var(--space-md);
+    }
+    .tea-step h5 { color: var(--clr-green); margin-bottom: var(--space-sm); }
+    .tea-step p  { font-size: var(--fs-sm); color: var(--clr-text-light); margin: 0; }
+    .hospitable-grid {
+      display: grid;
+      gap: var(--space-lg);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 640px) { .hospitable-grid { grid-template-columns: repeat(2, 1fr); } }
+    .hospitable-item {
+      display: flex;
+      gap: var(--space-md);
+      align-items: flex-start;
+      padding: var(--space-lg);
+      background: var(--clr-white);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+    }
+    .hospitable-item i {
+      font-size: var(--fs-xl);
+      color: var(--clr-gold);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .hospitable-item h5 { color: var(--clr-green); margin-bottom: var(--space-xs); }
+    .hospitable-item p  { font-size: var(--fs-sm); color: var(--clr-text-light); margin: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAV -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <nav class="nav-wrapper" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-logo" aria-label="Explore Sri Lanka – Home">
+          Explore Sri Lanka<span>Travel &amp; Culture Guide</span>
+        </a>
+        <ul class="nav-links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="culture-food.html" class="active">Culture &amp; Food</a></li>
+          <li><a href="travel-planner.html">Plan Your Trip</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu"
+                aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+      <a href="index.html">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="culture-food.html" class="active">Culture &amp; Food</a>
+      <a href="travel-planner.html">Plan Your Trip</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="hero hero--page" aria-label="Culture and Food hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content container">
+      <span class="hero-eyebrow">
+        <i class="fas fa-hands-praying" aria-hidden="true"></i> Living Culture
+      </span>
+      <h1 class="hero-title">Culture &amp; Food</h1>
+      <p class="hero-subtitle">Festivals, traditions, food, tea, and the extraordinary warmth of Sri Lankan people — explore the living soul of the island.</p>
+    </div>
+  </section>
+
+  <main id="main-content">
+
+    <!-- ═══════════════════════════════════════════════════════
+         INTRO STRIP
+         ═══════════════════════════════════════════════════════ -->
+    <section class="section-pad" aria-labelledby="culture-intro-heading">
+      <div class="container">
+        <div class="culture-intro reveal">
+          <div>
+            <div class="img-placeholder" style="aspect-ratio:4/3;" role="img"
+                 aria-label="Placeholder: Traditional Sri Lankan Kandyan dancer in ornate costume">
+              <i class="fas fa-music" aria-hidden="true"></i>
+              <img src="images/Dancer.jpeg" alt="">
+            </div>
+          </div>
+          <div class="culture-content">
+            <span class="eyebrow">The Soul of Sri Lanka</span>
+            <h2 id="culture-intro-heading">A Culture as Rich as the Island Itself</h2>
+            <div class="section-divider" aria-hidden="true"></div>
+            <p>Sri Lanka's culture is a living tapestry woven from over 2,500 years of continuous civilisation. Sinhalese, Tamil, Muslim, and Burgher communities have each contributed their own traditions, languages, cuisines, and religious practices to create a multicultural society of remarkable depth and warmth.</p>
+            <p>Buddhism has shaped the island's identity profoundly — from the intricate architecture of ancient dagobas and the monastic way of life, to the serene rhythm of daily puja ceremonies and the joyful communal celebrations of Vesak. Yet Sri Lanka's culture is never monolithic; every province, every valley, every coastal village has its own festivals, its own flavours, and its own stories.</p>
+            <div class="highlight-box">
+              <p>"In Sri Lanka, hospitality is not a policy — it is a reflex. Guests are honoured as gods."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         TABS (DESKTOP) + ACCORDION (MOBILE) – jQuery powered
+         ═══════════════════════════════════════════════════════ -->
+    <section class="section-pad bg-beige" aria-labelledby="culture-tabs-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">Explore the Culture</span>
+          <h2 id="culture-tabs-heading">Five Pillars of Sri Lankan Culture</h2>
+          <div class="section-divider" aria-hidden="true"></div>
+          <p>Select a topic below to explore in depth.</p>
+        </div>
+
+        <!-- ── DESKTOP: TAB NAVIGATION ── -->
+        <div class="reveal" role="tablist" aria-label="Culture topics">
+          <div class="tabs-nav">
+            <button class="tab-btn active" data-tab="tab-festivals"
+                    role="tab" aria-selected="true" aria-controls="tab-festivals" id="btn-festivals">
+              <i class="fas fa-star-and-crescent" aria-hidden="true"></i> Festivals
+            </button>
+            <button class="tab-btn" data-tab="tab-traditions"
+                    role="tab" aria-selected="false" aria-controls="tab-traditions" id="btn-traditions">
+              <i class="fas fa-hand-peace" aria-hidden="true"></i> Traditions
+            </button>
+            <button class="tab-btn" data-tab="tab-food"
+                    role="tab" aria-selected="false" aria-controls="tab-food" id="btn-food">
+              <i class="fas fa-utensils" aria-hidden="true"></i> Food
+            </button>
+            <button class="tab-btn" data-tab="tab-tea"
+                    role="tab" aria-selected="false" aria-controls="tab-tea" id="btn-tea">
+              <i class="fas fa-mug-hot" aria-hidden="true"></i> Tea Culture
+            </button>
+            <button class="tab-btn" data-tab="tab-hospitality"
+                    role="tab" aria-selected="false" aria-controls="tab-hospitality" id="btn-hospitality">
+              <i class="fas fa-heart" aria-hidden="true"></i> Hospitality
+            </button>
+          </div>
+
+          <!-- ── TAB: FESTIVALS ── -->
+          <div class="tab-panel" id="tab-festivals" role="tabpanel" aria-labelledby="btn-festivals">
+            <h3 style="margin-bottom:var(--space-lg);">Festivals of Sri Lanka</h3>
+            <div class="festival-card-grid" style="display:grid; gap:var(--space-xl); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+
+              <div class="festival-card">
+                <div class="festival-icon">🪔</div>
+                <h4>Vesak Poya</h4>
+                <p>The most sacred Buddhist festival, celebrated in May on the full moon to commemorate the birth, enlightenment, and passing of the Buddha. Streets are illuminated with pandals (lantern structures) of extraordinary beauty, and free meals are distributed to all passersby at dansala stalls.</p>
+              </div>
+
+              <div class="festival-card">
+                <div class="festival-icon">🌸</div>
+                <h4>Sinhala &amp; Tamil New Year</h4>
+                <p>Celebrated on April 13th–14th, this is one of Sri Lanka's most cherished national holidays. Families come together to perform traditional rituals, light the hearth at the auspicious moment, eat milk rice (kiribath), play traditional games, and exchange gifts and sweets.</p>
+              </div>
+
+              <div class="festival-card">
+                <div class="festival-icon">🐘</div>
+                <h4>Kandy Esala Perahera</h4>
+                <p>One of Asia's most spectacular processions, held in July/August in Kandy. The festival features elaborately decorated elephants, traditional drummers, whip-crackers, and torch-bearers parading through the streets in honour of the Sacred Tooth Relic of the Buddha.</p>
+              </div>
+
+              <div class="festival-card">
+                <div class="festival-icon">🎇</div>
+                <h4>Deepavali</h4>
+                <p>The Hindu Festival of Lights, celebrated by Sri Lanka's Tamil community with oil lamps, fireworks, traditional sweets, and the worship of Goddess Lakshmi. It is a public holiday marking the triumph of light over darkness and knowledge over ignorance.</p>
+              </div>
+
+              <div class="festival-card">
+                <div class="festival-icon">🌙</div>
+                <h4>Milad un-Nabi</h4>
+                <p>The Prophet's birthday, celebrated by Sri Lanka's Muslim community with prayers, recitations, community meals, and charitable acts. Mosques across the country are decorated with colourful lights and flags.</p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- ── TAB: TRADITIONS ── -->
+          <div class="tab-panel" id="tab-traditions" role="tabpanel" aria-labelledby="btn-traditions">
+            <div class="content-with-image">
+              <div>
+                <h3 style="margin-bottom:var(--space-md);">Living Traditions</h3>
+                <p>Sri Lankan traditions are deeply rooted in Buddhist and Hindu philosophical values that emphasise respect, community, and harmony with the natural world. These traditions shape daily life in ways both visible and subtle.</p>
+
+                <h4 style="color:var(--clr-green); margin:var(--space-lg) 0 var(--space-sm);">Greetings &amp; Respect</h4>
+                <p>The traditional Sri Lankan greeting is <em>Ayubowan</em> — placing both hands together at the chest and bowing slightly. The word translates as "may you live long" and is a gesture of deep respect and warm welcome. Elders and monks are always greeted first and treated with special reverence.</p>
+
+                <h4 style="color:var(--clr-green); margin:var(--space-lg) 0 var(--space-sm);">Dress &amp; Attire</h4>
+                <p>Traditional Sri Lankan dress for women includes the <em>saree</em> and the <em>osariya</em> (Kandyan saree), a regal nine-yard draping style worn at formal occasions. Men traditionally wear the <em>sarong</em> (a wraparound cloth), though Western dress is common in cities. When visiting temples, modest clothing covering the shoulders and knees is required.</p>
+
+                <h4 style="color:var(--clr-green); margin:var(--space-lg) 0 var(--space-sm);">Family &amp; Community Values</h4>
+                <p>Family is the centre of Sri Lankan life. Extended families often live together or nearby, and communal celebrations of weddings, births, and religious milestones are elaborate, generous, and inclusive. Neighbours, neighbours' neighbours, and even strangers are welcomed at festive gatherings.</p>
+
+                <h4 style="color:var(--clr-green); margin:var(--space-lg) 0 var(--space-sm);">Religious Practices</h4>
+                <p>Daily puja (worship) at home shrines and temple visits are integral to life for most Sri Lankans. The full-moon (poya) day is a public holiday each month, during which many Sri Lankans observe sil (a day of spiritual reflection, fasting, and merit-making).</p>
+              </div>
+              <div>
+                <div class="img-placeholder" style="aspect-ratio:3/4;" role="img"
+                     aria-label="Placeholder: Traditional Sri Lankan wedding ceremony with Kandyan attire">
+                  <i class="fas fa-ring" aria-hidden="true"></i>
+                  <img src="images/Sri-lanka-wedding.jpg" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── TAB: FOOD ── -->
+          <div class="tab-panel" id="tab-food" role="tabpanel" aria-labelledby="btn-food">
+            <h3 style="margin-bottom:var(--space-md);">The Sri Lankan Table</h3>
+            <p style="color:var(--clr-text-light); margin-bottom:var(--space-xl);">Sri Lankan cuisine is one of the most vibrant and complex in Asia — bold spices, fresh coconut, tangy tamarind, and pandan-laced curries create an unforgettable flavour experience.</p>
+
+            <div class="food-grid">
+              <div class="food-item">
+                <h4><i class="fas fa-utensils" aria-hidden="true"></i> Rice &amp; Curry</h4>
+                <p>The cornerstone of Sri Lankan dining. A typical meal consists of steamed red or white rice accompanied by multiple curries — fish, chicken, lentils (dhal), a coconut sambol, a leafy mallum, and a fiery pol sambol. Traditionally eaten with the right hand.</p>
+              </div>
+              <div class="food-item">
+                <h4><i class="fas fa-fire" aria-hidden="true"></i> Hoppers (Appa)</h4>
+                <p>Bowl-shaped pancakes made from fermented rice flour and coconut milk. The classic egg hopper features a perfectly cooked egg in the centre. String hoppers (indiappa) are delicate rice flour noodle nests, typically eaten at breakfast with a fragrant curry.</p>
+              </div>
+              <div class="food-item">
+                <h4><i class="fas fa-mortar-pestle" aria-hidden="true"></i> Kottu Roti</h4>
+                <p>Sri Lanka's beloved street food – shredded flat bread (roti) stir-fried on a hot iron griddle with vegetables, egg, and a choice of chicken, beef, or seafood. The rhythmic clanging of the steel blades on the griddle is the unmistakable soundtrack of Sri Lankan evenings.</p>
+              </div>
+              <div class="food-item">
+                <h4><i class="fas fa-pepper-hot" aria-hidden="true"></i> Pol Sambol</h4>
+                <p>A fiery coconut relish made from freshly grated coconut, red chilli, shallots, Maldive fish, lime juice, and salt. It is the essential accompaniment to every Sri Lankan breakfast and adds a welcome punch of heat and flavour to any meal.</p>
+              </div>
+              <div class="food-item">
+                <h4><i class="fas fa-cookie" aria-hidden="true"></i> Milk Rice (Kiribath)</h4>
+                <p>Prepared by cooking rice in rich coconut milk until creamy, then pressed flat and cut into diamond shapes. Kiribath is eaten at auspicious occasions — on the first day of every month, at New Year, weddings, and any celebration worth marking with a sacred tradition.</p>
+              </div>
+              <div class="food-item">
+                <h4><i class="fas fa-fish" aria-hidden="true"></i> Seafood</h4>
+                <p>With over 1,600 kilometres of coastline, Sri Lanka offers exceptional fresh seafood — grilled cuttlefish, prawn curry, crab in black pepper sauce, and freshly caught tuna prepared with a complexity of spices that transforms each dish into an experience.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── TAB: TEA CULTURE ── -->
+          <div class="tab-panel" id="tab-tea" role="tabpanel" aria-labelledby="btn-tea">
+            <div class="content-with-image reverse">
+              <div>
+                <h3 style="margin-bottom:var(--space-md);">The Art of Ceylon Tea</h3>
+                <p>Ceylon tea is arguably Sri Lanka's most famous gift to the world. Introduced by British planter James Taylor in the 1860s as a replacement for the failing coffee industry, tea quickly transformed the island's economy and landscape. Today, Sri Lanka is the world's fourth-largest tea producer, and its highland estates produce some of the finest single-origin teas on earth.</p>
+
+                <div class="highlight-box">
+                  <p>"Tea is not just a drink in Sri Lanka. It is a ritual, a greeting, and a conversation all in one."</p>
+                </div>
+
+                <p>The three main growing regions each produce teas with distinct characters: <strong>Nuwara Eliya</strong> teas are light, floral, and delicate; <strong>Kandy</strong> teas are medium-bodied and versatile; while <strong>Uva</strong> teas are bold, brisk, and full of character.</p>
+
+                <h4 style="color:var(--clr-green); margin:var(--space-lg) 0 var(--space-md);">From Leaf to Cup — The Journey</h4>
+                <div class="tea-steps">
+                  <div class="tea-step">
+                    <h5>Plucking</h5>
+                    <p>Skilled tea pluckers select only the top two leaves and a bud — the finest, most tender growth — by hand, filling baskets weighing up to 25kg per day.</p>
+                  </div>
+                  <div class="tea-step">
+                    <h5>Withering &amp; Rolling</h5>
+                    <p>Leaves are spread on wire racks to reduce moisture, then rolled to break cell walls, releasing the essential oils and enzymes that create the tea's flavour.</p>
+                  </div>
+                  <div class="tea-step">
+                    <h5>Firing &amp; Grading</h5>
+                    <p>Rolled leaves are fired in ovens to halt oxidation and lock in flavour. The dried tea is then sorted, graded by leaf size, and prepared for packaging and export.</p>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="img-placeholder" style="aspect-ratio:3/4;" role="img"
+                     aria-label="Placeholder: Tea plucker harvesting leaves on a highland estate in Nuwara Eliya">
+                  <i class="fas fa-mug-hot" aria-hidden="true"></i>
+                  <img src="images/Tea-plucker.jpg" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── TAB: HOSPITALITY ── -->
+          <div class="tab-panel" id="tab-hospitality" role="tabpanel" aria-labelledby="btn-hospitality">
+            <h3 style="margin-bottom:var(--space-md);">The Spirit of Ayubowan</h3>
+            <p style="color:var(--clr-text-light); margin-bottom:var(--space-xl);">Sri Lankans are consistently ranked among the warmest, most hospitable people in Asia. The concept of <em>atithi devo bhava</em> — the guest is god — runs deep in the culture, creating experiences that travellers remember long after they leave the island.</p>
+
+            <div class="hospitable-grid">
+              <div class="hospitable-item">
+                <i class="fas fa-home" aria-hidden="true"></i>
+                <div>
+                  <h5>Village Stays</h5>
+                  <p>Authentic homestays and village tourism programmes allow guests to live with local families, share home-cooked meals, and participate in daily life — from cooking classes to farming, fishing, and craft-making.</p>
+                </div>
+              </div>
+              <div class="hospitable-item">
+                <i class="fas fa-hands-holding" aria-hidden="true"></i>
+                <div>
+                  <h5>Generous Sharing</h5>
+                  <p>It is considered rude to eat alone in front of others without offering to share. Food is given freely and generously, and guests are always served first with the best portions available.</p>
+                </div>
+              </div>
+              <div class="hospitable-item">
+                <i class="fas fa-mug-hot" aria-hidden="true"></i>
+                <div>
+                  <h5>Tea as a Welcome</h5>
+                  <p>No guest visits a Sri Lankan home without being offered a cup of tea within minutes of arrival. This small ritual is the most sincere expression of welcome in the culture — and the tea is always freshly brewed.</p>
+                </div>
+              </div>
+              <div class="hospitable-item">
+                <i class="fas fa-map-signs" aria-hidden="true"></i>
+                <div>
+                  <h5>Going Out of Their Way</h5>
+                  <p>Sri Lankans will readily walk or drive visitors to a destination rather than simply giving directions. This instinctive helpfulness — without expectation of reward — consistently surprises and delights travellers.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /tabs -->
+
+        <!-- ── MOBILE: ACCORDION (same content, condensed) ── -->
+        <!-- Note: Tabs are hidden and accordion shown on small screens via CSS display logic
+             managed by the jQuery initTabs / initAccordion functions. On mobile, users see
+             accordion-style interaction instead of horizontal tab buttons. -->
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section-pad text-center" aria-label="Explore more call to action">
+      <div class="container reveal" style="max-width:640px;">
+        <span class="eyebrow">Keep Exploring</span>
+        <h2>Ready to Experience It All First-hand?</h2>
+        <div class="section-divider" aria-hidden="true"></div>
+        <p style="color:var(--clr-text-light); margin-bottom:var(--space-xl);">Plan your cultural journey across Sri Lanka with our personalised trip planning tool.</p>
+        <div style="display:flex; gap:var(--space-md); justify-content:center; flex-wrap:wrap;">
+          <a href="travel-planner.html" class="btn btn-primary">
+            <i class="fas fa-route" aria-hidden="true"></i> Plan a Cultural Trip
+          </a>
+          <a href="destinations.html" class="btn btn-outline">
+            <i class="fas fa-compass" aria-hidden="true"></i> View Destinations
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Explore Sri Lanka<span>Travel &amp; Culture Guide</span></a>
+          <p>Your premium digital companion for discovering the extraordinary beauty, culture, and destinations of the Pearl of the Indian Ocean.</p>
+          <div class="social-links" aria-label="Social media links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Twitter / X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="culture-food.html">Culture &amp; Food</a></li>
+            <li><a href="travel-planner.html">Plan Your Trip</a></li>
+            <li><a href="contact.html">Contact &amp; FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Top Destinations</h4>
+          <ul>
+            <li><a href="destinations.html">Colombo</a></li>
+            <li><a href="destinations.html">Kandy</a></li>
+            <li><a href="destinations.html">Ella</a></li>
+            <li><a href="destinations.html">Sigiriya</a></li>
+            <li><a href="destinations.html">Mirissa</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Explore Sri Lanka – Travel &amp; Culture Guide. All rights reserved. | Designed for educational purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up" aria-hidden="true"></i>
+  </button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+          crossorigin="anonymous"></script>
+  <script src="js/script.js"></script>
+  <script src="js/jquery-effects.js"></script>
+</body>
+</html>

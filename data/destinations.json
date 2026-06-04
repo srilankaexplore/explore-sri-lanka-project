@@ -1,0 +1,146 @@
+[
+  {
+    "id": "colombo",
+    "name": "Colombo",
+    "category": "city",
+    "province": "Western",
+    "tagline": "Sri Lanka's vibrant capital city",
+    "description": "Colombo is Sri Lanka's bustling commercial capital, a city of contrasts where Dutch colonial architecture stands alongside gleaming skyscrapers. The vibrant Pettah market, the National Museum, the serene Gangaramaya Temple, and the oceanfront Galle Face Green all make Colombo a compelling starting point for any Sri Lankan adventure.",
+    "highlights": [
+      "Gangaramaya Temple",
+      "Pettah Market",
+      "Galle Face Green",
+      "National Museum",
+      "Colombo Fort"
+    ],
+    "best_time": "December to April",
+    "image_alt": "Aerial view of Colombo city skyline and harbour",
+    "tags": ["city", "culture", "shopping", "history"]
+  },
+  {
+    "id": "kandy",
+    "name": "Kandy",
+    "category": "heritage",
+    "province": "Central",
+    "tagline": "The last royal capital of Sri Lanka",
+    "description": "Nestled amid misty hills in the heart of the island, Kandy was the last capital of the ancient kings of Sri Lanka and is home to the revered Temple of the Tooth Relic (Sri Dalada Maligawa). Every August, the city comes alive with the spectacular Esala Perahera – one of Asia's grandest processions of elephants, dancers, and torch-bearers.",
+    "highlights": [
+      "Temple of the Tooth Relic",
+      "Kandy Lake",
+      "Royal Botanical Gardens",
+      "Kandyan Dance Performance",
+      "Esala Perahera Festival"
+    ],
+    "best_time": "December to April",
+    "image_alt": "Temple of the Tooth Relic reflected in Kandy Lake at dusk",
+    "tags": ["heritage", "culture", "unesco", "festivals"]
+  },
+  {
+    "id": "galle",
+    "name": "Galle",
+    "category": "heritage",
+    "province": "Southern",
+    "tagline": "A Dutch colonial fort by the sea",
+    "description": "Galle Fort, a UNESCO World Heritage Site, is one of the best-preserved colonial sea fortresses in South and Southeast Asia. Within its thick ramparts you will find cobblestone streets, boutique cafes, Dutch Reformed churches, and some of the finest art galleries in Sri Lanka – all within walking distance of beautiful beaches.",
+    "highlights": [
+      "Galle Fort (UNESCO)",
+      "Dutch Reformed Church",
+      "Galle Lighthouse",
+      "Rampart Walk at Sunset",
+      "Boutique Galleries & Cafes"
+    ],
+    "best_time": "November to April",
+    "image_alt": "Historic Galle Fort lighthouse at sunset over the Indian Ocean",
+    "tags": ["heritage", "beach", "unesco", "colonial"]
+  },
+  {
+    "id": "ella",
+    "name": "Ella",
+    "category": "nature",
+    "province": "Uva",
+    "tagline": "Misty mountains and iconic train bridges",
+    "description": "Ella is a small hill town with a big reputation among travellers. Surrounded by lush tea plantations and dramatic mountain landscapes, it offers spectacular hikes to Little Adam's Peak and Ella Rock, and the world-famous Nine Arch Bridge – a colonial-era railway marvel that arches through the jungle.",
+    "highlights": [
+      "Nine Arch Bridge",
+      "Little Adam's Peak Hike",
+      "Ella Rock",
+      "Ravana Falls",
+      "Scenic Train from Kandy"
+    ],
+    "best_time": "April to September",
+    "image_alt": "The Nine Arch Bridge in Ella surrounded by lush green tea gardens",
+    "tags": ["nature", "hiking", "scenic", "tea"]
+  },
+  {
+    "id": "sigiriya",
+    "name": "Sigiriya",
+    "category": "heritage",
+    "province": "Central",
+    "tagline": "The Lion Rock – an ancient sky fortress",
+    "description": "Rising dramatically from the flat plains of the Cultural Triangle, Sigiriya is a colossal 200-metre-high rock fortress built by King Kashyapa in the 5th century CE. Visitors climb to the summit through elaborate water gardens, past extraordinary frescoes of celestial maidens, and through the famous lion's paw gateway to reach breathtaking panoramic views.",
+    "highlights": [
+      "Sigiriya Rock Fortress (UNESCO)",
+      "Sigiriya Frescoes",
+      "Water Gardens",
+      "Lion's Paw Gateway",
+      "Pidurangala Rock Viewpoint"
+    ],
+    "best_time": "May to September",
+    "image_alt": "Sigiriya Lion Rock fortress rising from the jungle at golden hour",
+    "tags": ["heritage", "unesco", "archaeology", "adventure"]
+  },
+  {
+    "id": "nuwara-eliya",
+    "name": "Nuwara Eliya",
+    "category": "nature",
+    "province": "Central",
+    "tagline": "Little England in the clouds",
+    "description": "Often called 'Little England' for its cool climate and colonial architecture, Nuwara Eliya sits at an elevation of 1,868 metres amidst rolling tea estates. Visit working tea factories, stroll through the manicured Victoria Park, or enjoy a round at the legendary golf course – all while breathing the crisp, fresh mountain air.",
+    "highlights": [
+      "Tea Plantation & Factory Tours",
+      "Victoria Park",
+      "Gregory Lake",
+      "Horton Plains National Park",
+      "World's End Viewpoint"
+    ],
+    "best_time": "April to September",
+    "image_alt": "Rolling green tea estates in Nuwara Eliya under a misty sky",
+    "tags": ["nature", "tea", "hiking", "scenic"]
+  },
+  {
+    "id": "anuradhapura",
+    "name": "Anuradhapura",
+    "category": "heritage",
+    "province": "North Central",
+    "tagline": "Sri Lanka's ancient sacred capital",
+    "description": "Anuradhapura is one of the ancient capitals of Sri Lanka and a UNESCO World Heritage Site of extraordinary scale. For over a thousand years it was the capital of a sophisticated civilisation. Today, enormous dagobas (dome-shaped shrines), beautiful moonstones, carved pools, and the sacred Sri Maha Bodhi tree – grown from a cutting of the original Bodhi tree under which the Buddha attained enlightenment – draw pilgrims and historians alike.",
+    "highlights": [
+      "Sri Maha Bodhi Tree",
+      "Ruwanwelisaya Dagoba",
+      "Jetavanaramaya Stupa",
+      "Thuparama Dagoba",
+      "Archaeological Museum"
+    ],
+    "best_time": "May to October",
+    "image_alt": "The great white Ruwanwelisaya Dagoba in Anuradhapura at sunrise",
+    "tags": ["heritage", "unesco", "religious", "history"]
+  },
+  {
+    "id": "mirissa",
+    "name": "Mirissa",
+    "category": "beach",
+    "province": "Southern",
+    "tagline": "Sri Lanka's premier beach paradise",
+    "description": "Mirissa is the jewel of Sri Lanka's southern coast – a crescent of golden sand framed by coconut palms and lapped by warm, turquoise waters. By day it offers world-class whale and dolphin watching (blue whales are commonly sighted from November to April), surfing, and snorkelling. By evening the beach transforms into a relaxed paradise of fresh seafood, cocktails, and spectacular sunsets.",
+    "highlights": [
+      "Whale Watching",
+      "Parrot Rock Viewpoint",
+      "Surfing & Snorkelling",
+      "Secret Beach",
+      "Sunset Seafood Restaurants"
+    ],
+    "best_time": "November to April",
+    "image_alt": "Golden sunset over Mirissa beach with coconut palms and crashing waves",
+    "tags": ["beach", "wildlife", "watersports", "relaxation"]
+  }
+]

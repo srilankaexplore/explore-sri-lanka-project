@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<!--
+  Explore Sri Lanka – Travel Planner Page
+  File   : travel-planner.html
+  Author : Web Design Assignment
+  Desc   : Interactive trip planner form. jQuery AJAX loads destinations
+           from data/destinations.json to populate location checkboxes.
+           JavaScript (script.js) generates a personalised itinerary on submit.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Use our interactive trip planner to build a personalised Sri Lanka itinerary based on your interests, budget, and preferred destinations.">
+  <title>Plan Your Trip | Explore Sri Lanka – Travel &amp; Culture Guide</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plh7eecS6FHlvA2LZQC8zHAREuCkg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Page-specific styles */
+    .planner-how-it-works {
+      display: grid;
+      gap: var(--space-xl);
+      grid-template-columns: 1fr;
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+    @media (min-width: 768px) {
+      .planner-how-it-works { grid-template-columns: repeat(4, 1fr); }
+    }
+    .how-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .how-step-num {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--clr-green);
+      color: white;
+      font-family: var(--font-heading);
+      font-size: var(--fs-xl);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .how-step h4 { color: var(--clr-green); font-size: var(--fs-md); }
+    .how-step p  { font-size: var(--fs-sm); color: var(--clr-text-light); margin:0; }
+
+    /* Planner layout */
+    .planner-layout {
+      display: grid;
+      gap: var(--space-2xl);
+      grid-template-columns: 1fr;
+    }
+    @media (min-width: 1024px) {
+      .planner-layout { grid-template-columns: 3fr 2fr; }
+    }
+
+    /* Form card */
+    .form-card {
+      background: var(--clr-white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      padding: var(--space-2xl);
+    }
+    .form-card h3 {
+      font-size: var(--fs-xl);
+      color: var(--clr-green);
+      margin-bottom: var(--space-xl);
+      padding-bottom: var(--space-md);
+      border-bottom: 2px solid var(--clr-beige-dark);
+    }
+
+    /* Result card */
+    .result-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .result-header {
+      background: var(--clr-green);
+      padding: var(--space-xl);
+      color: var(--clr-white);
+    }
+    .result-header h3 {
+      color: var(--clr-gold);
+      font-size: var(--fs-xl);
+      margin-bottom: var(--space-sm);
+    }
+    .result-header p {
+      color: rgba(255,255,255,0.75);
+      font-size: var(--fs-sm);
+      margin: 0;
+    }
+    .result-body {
+      background: var(--clr-green-dark);
+      padding: var(--space-xl);
+      min-height: 200px;
+    }
+    .result-placeholder {
+      text-align: center;
+      padding: var(--space-2xl) 0;
+      color: rgba(255,255,255,0.4);
+    }
+    .result-placeholder i { font-size: 3rem; display: block; margin-bottom: var(--space-md); }
+    .result-placeholder p { font-size: var(--fs-sm); }
+
+    /* Trip summary badge */
+    #itinerary-summary-badge {
+      background: rgba(212,175,55,0.15);
+      border: 1px solid rgba(212,175,55,0.4);
+      color: var(--clr-gold);
+      border-radius: var(--radius-full);
+      padding: 0.3rem 0.9rem;
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: var(--space-lg);
+    }
+
+    /* Form section labels */
+    .form-section-label {
+      font-size: var(--fs-xs);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clr-gold);
+      margin: var(--space-xl) 0 var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .form-section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--clr-border);
+    }
+
+    /* Error for planner */
+    #planner-error {
+      background: #fde8e8;
+      border: 1px solid #c0392b;
+      color: #922b21;
+      padding: var(--space-md);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-lg);
+      font-size: var(--fs-sm);
+      display: none;
+    }
+    #planner-error.visible { display: block; }
+
+    /* Tips sidebar */
+    .tips-card {
+      background: var(--clr-beige);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin-top: var(--space-xl);
+    }
+    .tips-card h4 {
+      color: var(--clr-green);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .tip-item {
+      display: flex;
+      gap: var(--space-md);
+      align-items: flex-start;
+      margin-bottom: var(--space-md);
+      padding-bottom: var(--space-md);
+      border-bottom: 1px solid var(--clr-border);
+    }
+    .tip-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .tip-item i { color: var(--clr-gold); flex-shrink: 0; margin-top: 3px; }
+    .tip-item p { font-size: var(--fs-sm); color: var(--clr-text-light); margin: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAV -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <nav class="nav-wrapper" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-logo" aria-label="Explore Sri Lanka – Home">
+          Explore Sri Lanka<span>Travel &amp; Culture Guide</span>
+        </a>
+        <ul class="nav-links" role="list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="culture-food.html">Culture &amp; Food</a></li>
+          <li><a href="travel-planner.html" class="active">Plan Your Trip</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle mobile menu"
+                aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+      <a href="index.html">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="culture-food.html">Culture &amp; Food</a>
+      <a href="travel-planner.html" class="active">Plan Your Trip</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="hero hero--page" aria-label="Travel Planner hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content container">
+      <span class="hero-eyebrow">
+        <i class="fas fa-route" aria-hidden="true"></i> Build Your Journey
+      </span>
+      <h1 class="hero-title">Plan Your Trip</h1>
+      <p class="hero-subtitle">Tell us what you love, how many days you have, and where you'd like to go. We'll build your perfect Sri Lanka itinerary instantly.</p>
+    </div>
+  </section>
+
+  <main id="main-content">
+
+    <!-- HOW IT WORKS -->
+    <section class="section-pad bg-beige" aria-labelledby="how-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">Simple &amp; Fast</span>
+          <h2 id="how-heading">How It Works</h2>
+          <div class="section-divider" aria-hidden="true"></div>
+        </div>
+        <div class="planner-how-it-works reveal">
+          <div class="how-step">
+            <div class="how-step-num">1</div>
+            <h4>Choose Your Style</h4>
+            <p>Select the type of experience you're looking for — adventure, cultural, beach, or family.</p>
+          </div>
+          <div class="how-step">
+            <div class="how-step-num">2</div>
+            <h4>Set Your Duration</h4>
+            <p>Tell us how many days you have — from a quick 3-day escape to a full 10-day expedition.</p>
+          </div>
+          <div class="how-step">
+            <div class="how-step-num">3</div>
+            <h4>Pick Destinations</h4>
+            <p>Choose the places that excite you most from our eight featured Sri Lankan destinations.</p>
+          </div>
+          <div class="how-step">
+            <div class="how-step-num">4</div>
+            <h4>Get Your Itinerary</h4>
+            <p>Instantly receive a personalised day-by-day travel plan tailored to your selections.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN PLANNER -->
+    <section class="section-pad" aria-labelledby="planner-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">Interactive Tool</span>
+          <h2 id="planner-heading">Build Your Itinerary</h2>
+          <div class="section-divider" aria-hidden="true"></div>
+          <p>Destination options are loaded dynamically via AJAX from our destinations database.</p>
+        </div>
+
+        <div class="planner-layout">
+
+          <!-- ── FORM ── -->
+          <div class="form-card reveal">
+            <h3><i class="fas fa-sliders-h" aria-hidden="true"></i> Your Trip Preferences</h3>
+
+            <!-- Error message -->
+            <div id="planner-error" role="alert" aria-live="polite"></div>
+
+            <form id="trip-planner-form" novalidate aria-label="Trip planner form">
+
+              <!-- Trip Type -->
+              <div class="form-section-label">Trip Style</div>
+              <div class="form-group">
+                <label for="trip-type">What kind of trip are you planning? <span class="req" aria-hidden="true">*</span></label>
+                <select class="form-control" id="trip-type" name="trip-type" required aria-required="true">
+                  <option value="" disabled selected>Select trip type…</option>
+                  <option value="adventure">Adventure &amp; Active</option>
+                  <option value="cultural">Cultural &amp; Heritage</option>
+                  <option value="beach">Beach &amp; Relaxation</option>
+                  <option value="family">Family Holiday</option>
+                </select>
+              </div>
+
+              <!-- Duration -->
+              <div class="form-section-label">Duration</div>
+              <div class="form-group">
+                <label for="num-days">How many days? <span class="req" aria-hidden="true">*</span></label>
+                <select class="form-control" id="num-days" name="num-days" required aria-required="true">
+                  <option value="" disabled selected>Select duration…</option>
+                  <option value="3">3 Days – Quick Escape</option>
+                  <option value="5">5 Days – Short Break</option>
+                  <option value="7">7 Days – One Week</option>
+                  <option value="10">10 Days – Full Exploration</option>
+                </select>
+              </div>
+
+              <!-- Budget -->
+              <div class="form-section-label">Budget</div>
+              <div class="form-group">
+                <label for="budget-level">What is your budget level? <span class="req" aria-hidden="true">*</span></label>
+                <select class="form-control" id="budget-level" name="budget-level" required aria-required="true">
+                  <option value="" disabled selected>Select budget…</option>
+                  <option value="budget">Budget-Friendly (Guesthouses, local food)</option>
+                  <option value="moderate">Moderate (Mid-range hotels, mix of dining)</option>
+                  <option value="luxury">Luxury (Boutique resorts, fine dining)</option>
+                </select>
+              </div>
+
+              <!-- Destinations (loaded via AJAX) -->
+              <div class="form-section-label">Destinations</div>
+              <div class="form-group">
+                <label>Which destinations would you like to include? <span class="req" aria-hidden="true">*</span></label>
+                <p style="font-size:var(--fs-xs); color:var(--clr-text-light); margin-bottom:var(--space-md);">
+                  <i class="fas fa-info-circle" aria-hidden="true"></i>
+                  Destination list is loaded from our database using AJAX.
+                </p>
+                <!-- AJAX populates this container -->
+                <div id="ajax-destinations" aria-live="polite" aria-label="Destination checkboxes loading">
+                  <div class="loading-spinner">
+                    <div class="spinner" aria-hidden="true"></div>
+                    <span>Loading destinations…</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Submit -->
+              <div style="margin-top:var(--space-xl);">
+                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding-block:1rem;">
+                  <i class="fas fa-magic" aria-hidden="true"></i>
+                  Generate My Itinerary
+                </button>
+              </div>
+
+            </form>
+          </div>
+
+          <!-- ── RESULTS PANEL ── -->
+          <div>
+            <div class="result-card reveal">
+              <div class="result-header">
+                <h3><i class="fas fa-map-marked-alt" aria-hidden="true"></i> Your Personalised Itinerary</h3>
+                <p>Your day-by-day plan will appear here after you submit your preferences.</p>
+              </div>
+              <div class="result-body">
+
+                <!-- Placeholder (hidden when results are visible) -->
+                <div id="itinerary-placeholder" class="result-placeholder">
+                  <i class="fas fa-route" aria-hidden="true"></i>
+                  <p>Fill in the form on the left and click "Generate My Itinerary" to see your personalised Sri Lanka travel plan.</p>
+                </div>
+
+                <!-- Output (shown by JS after form submit) -->
+                <div id="itinerary-output" aria-live="polite" aria-label="Generated itinerary">
+                  <div id="itinerary-summary-badge" aria-live="polite"></div>
+                  <div id="itinerary-days"></div>
+                  <div style="margin-top:var(--space-xl); text-align:center;">
+                    <a href="contact.html" class="btn btn-secondary btn-sm">
+                      <i class="fas fa-headset" aria-hidden="true"></i> Get Expert Help
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Travel Tips -->
+            <div class="tips-card reveal">
+              <h4><i class="fas fa-lightbulb" aria-hidden="true"></i> Travel Tips for Sri Lanka</h4>
+              <div class="tip-item">
+                <i class="fas fa-calendar-check" aria-hidden="true"></i>
+                <p><strong>Best time to visit:</strong> December to March for the south and west coasts; April to September for the east coast. The hill country is pleasant year-round.</p>
+              </div>
+              <div class="tip-item">
+                <i class="fas fa-passport" aria-hidden="true"></i>
+                <p><strong>Visa:</strong> Most nationalities require an Electronic Travel Authorisation (ETA), obtainable online before arrival. Apply at eta.gov.lk.</p>
+              </div>
+              <div class="tip-item">
+                <i class="fas fa-train" aria-hidden="true"></i>
+                <p><strong>Getting around:</strong> The train network is scenic and affordable. Tuk-tuks are ideal for short distances. Private drivers are recommended for multi-day tours.</p>
+              </div>
+              <div class="tip-item">
+                <i class="fas fa-money-bill-wave" aria-hidden="true"></i>
+                <p><strong>Currency:</strong> Sri Lankan Rupee (LKR). ATMs are widely available in cities and tourist areas. Credit cards accepted at most hotels and restaurants.</p>
+              </div>
+              <div class="tip-item">
+                <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                <p><strong>Safety:</strong> Sri Lanka is considered very safe for tourists. Petty theft can occur in crowded areas — use common sense and keep valuables secured.</p>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /planner-layout -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">Explore Sri Lanka<span>Travel &amp; Culture Guide</span></a>
+          <p>Your premium digital companion for discovering the extraordinary beauty, culture, and destinations of the Pearl of the Indian Ocean.</p>
+          <div class="social-links" aria-label="Social media links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Twitter / X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="culture-food.html">Culture &amp; Food</a></li>
+            <li><a href="travel-planner.html">Plan Your Trip</a></li>
+            <li><a href="contact.html">Contact &amp; FAQ</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Top Destinations</h4>
+          <ul>
+            <li><a href="destinations.html">Colombo</a></li>
+            <li><a href="destinations.html">Kandy</a></li>
+            <li><a href="destinations.html">Ella</a></li>
+            <li><a href="destinations.html">Sigiriya</a></li>
+            <li><a href="destinations.html">Mirissa</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Explore Sri Lanka – Travel &amp; Culture Guide. All rights reserved. | Designed for educational purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up" aria-hidden="true"></i>
+  </button>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+          crossorigin="anonymous"></script>
+  <script src="js/script.js"></script>
+  <script src="js/jquery-effects.js"></script>
+
+  <!-- Hide placeholder when results appear -->
+  <script>
+    // Watch for itinerary-output becoming visible and hide placeholder
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        var el = document.getElementById('itinerary-output');
+        var ph = document.getElementById('itinerary-placeholder');
+        if (el && ph) {
+          ph.style.display = el.classList.contains('visible') ? 'none' : 'block';
+        }
+      });
+    });
+    var outEl = document.getElementById('itinerary-output');
+    if (outEl) observer.observe(outEl, { attributes: true, attributeFilter: ['class'] });
+  </script>
+</body>
+</html>

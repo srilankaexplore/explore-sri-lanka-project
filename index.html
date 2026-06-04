@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<!--
+  Explore Sri Lanka – Home Page
+  File   : index.html
+  Author : Web Design Assignment
+  Desc   : Hero section, introduction, featured destinations, stats, CTA.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore Sri Lanka – your premium guide to destinations, culture, food, and travel planning in the Pearl of the Indian Ocean.">
+  <meta name="keywords" content="Sri Lanka, travel, tourism, destinations, culture, food, beaches, heritage">
+  <title>Home | Explore Sri Lanka – Travel &amp; Culture Guide</title>
+
+  <!-- Preconnect for Google Fonts performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plh7eecS6FHlvA2LZQC8zHAREuCkg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SITE HEADER & NAVIGATION
+       ═══════════════════════════════════════════════════════════ -->
+  <header class="site-header" role="banner">
+    <div class="container">
+      <nav class="nav-wrapper" role="navigation" aria-label="Main navigation">
+
+        <!-- Logo -->
+        <a href="index.html" class="nav-logo" aria-label="Explore Sri Lanka – Home">
+          Explore Sri Lanka
+          <span>Travel &amp; Culture Guide</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links" role="list">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="destinations.html">Destinations</a></li>
+          <li><a href="culture-food.html">Culture &amp; Food</a></li>
+          <li><a href="travel-planner.html">Plan Your Trip</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <!-- Hamburger (mobile only) -->
+        <button class="hamburger" id="hamburger"
+                aria-label="Toggle mobile menu" aria-expanded="false"
+                aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" aria-hidden="true">
+      <a href="index.html" class="active">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="culture-food.html">Culture &amp; Food</a>
+      <a href="travel-planner.html">Plan Your Trip</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HERO SECTION
+       ═══════════════════════════════════════════════════════════ -->
+  <section class="hero" aria-label="Hero – Discover Sri Lanka">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-content container">
+      <span class="hero-eyebrow">
+        <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+        Pearl of the Indian Ocean
+      </span>
+      <h1 class="hero-title">Discover the Beauty<br>of Sri Lanka</h1>
+      <p class="hero-subtitle">
+        From mist-covered tea plantations and ancient rock fortresses to sun-kissed
+        beaches and vibrant cultural traditions — your extraordinary journey starts here.
+      </p>
+      <div class="hero-actions">
+        <a href="destinations.html" class="btn btn-primary">
+          <i class="fas fa-compass" aria-hidden="true"></i>
+          Explore Destinations
+        </a>
+        <a href="travel-planner.html" class="btn btn-secondary">
+          <i class="fas fa-route" aria-hidden="true"></i>
+          Plan Your Trip
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <main id="main-content">
+
+    <!-- ═══════════════════════════════════════════════════════════
+         INTRODUCTION SECTION
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="section-pad" aria-labelledby="intro-heading">
+      <div class="container">
+        <div class="split-layout">
+
+          <!-- Image -->
+          <div class="reveal">
+            <div class="img-placeholder" role="img"
+                 aria-label="Placeholder: Scenic panoramic view of Sri Lanka landscape showing mountains, tea estates, and ocean">
+              <i class="fas fa-mountain" aria-hidden="true"></i>
+              <img src="images/Sri-Lanka-Panoramic-Image.jpeg" alt="">
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div class="split-text reveal">
+            <span class="eyebrow">About Sri Lanka</span>
+            <h2 id="intro-heading">An Island of Infinite Wonder</h2>
+            <div class="section-divider" aria-hidden="true"></div>
+            <p>
+              Nestled in the warm waters of the Indian Ocean just south of India, Sri Lanka is a teardrop-shaped
+              island that packs an extraordinary diversity of experiences into its 65,610 square kilometres.
+              Eight UNESCO World Heritage Sites, over 1,000 kilometres of pristine coastline, misty mountains,
+              ancient rainforests, and some of the world's finest tea estates await the curious traveller.
+            </p>
+            <p>
+              Known as the Pearl of the Indian Ocean, Sri Lanka has captivated explorers, traders, and travellers
+              for millennia. Arab merchants, Portuguese sailors, Dutch colonists, and British planters all left
+              their mark — creating a fascinating cultural tapestry that is uniquely Sri Lankan. Today, this
+              warm, hospitable island offers world-class wildlife safaris, culinary adventures, spiritual journeys,
+              and beach escapes, all within easy reach of each other.
+            </p>
+            <p>
+              Whether you seek the thrill of climbing a 5th-century rock fortress at sunrise, the meditative calm
+              of a Buddhist pilgrimage route, the satisfaction of a perfect surf wave, or simply the pleasure of
+              a freshly brewed cup of Ceylon tea overlooking emerald plantations — Sri Lanka will exceed your
+              every expectation.
+            </p>
+            <a href="destinations.html" class="btn btn-outline">
+              Discover All Destinations <i class="fas fa-arrow-right" aria-hidden="true"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         FEATURED DESTINATIONS
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="section-pad bg-beige" aria-labelledby="featured-heading">
+      <div class="container">
+
+        <div class="section-header reveal">
+          <span class="eyebrow">Top Picks</span>
+          <h2 id="featured-heading">Featured Destinations</h2>
+          <div class="section-divider" aria-hidden="true"></div>
+          <p>Three must-visit destinations that capture the essence of Sri Lanka's extraordinary diversity.</p>
+        </div>
+
+        <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+
+          <!-- Card 1: Sigiriya -->
+          <article class="card reveal">
+            <div class="card-img-wrap">
+              <div class="img-placeholder" role="img"
+                   aria-label="Placeholder: Sigiriya Lion Rock fortress rising from jungle at sunset">
+                <i class="fas fa-chess-rook" aria-hidden="true"></i>
+                <img src="images/sigiriya-rock.jpeg" alt="">
+              </div>
+              <span class="card-badge">Heritage</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Sigiriya</h3>
+              <p class="card-text">
+                Climb the ancient Lion Rock fortress to extraordinary 5th-century frescoes and sweeping views
+                across the jungle plains. A UNESCO World Heritage treasure and Sri Lanka's most iconic landmark.
+              </p>
+              <div class="card-footer-row">
+                <span style="font-size:var(--fs-xs); color:var(--clr-text-light);">
+                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i> Central Province
+                </span>
+                <a href="destinations.html" class="btn btn-primary btn-sm">Learn More</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Mirissa -->
+          <article class="card reveal">
+            <div class="card-img-wrap">
+              <div class="img-placeholder" role="img"
+                   aria-label="Placeholder: Golden Mirissa beach with coconut palms and turquoise water">
+                <i class="fas fa-umbrella-beach" aria-hidden="true"></i>
+                <img src="images/Mirissa.jpeg" alt="">
+              </div>
+              <span class="card-badge" style="background:var(--clr-blue);">Beach</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Mirissa</h3>
+              <p class="card-text">
+                Sri Lanka's most beloved beach destination combines golden sands, warm turquoise waters, world-class
+                whale watching, and a relaxed coastal atmosphere perfect for unwinding.
+              </p>
+              <div class="card-footer-row">
+                <span style="font-size:var(--fs-xs); color:var(--clr-text-light);">
+                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i> Southern Province
+                </span>
+                <a href="destinations.html" class="btn btn-primary btn-sm">Learn More</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: Ella -->
+          <article class="card reveal">
+            <div class="card-img-wrap">
+              <div class="img-placeholder" role="img"
+                   aria-label="Placeholder: Nine Arch Bridge in Ella surrounded by green tea plantations">
+                <i class="fas fa-train" aria-hidden="true"></i>
+                <img src="images/Ella-Nine-Arch-Bridge.jpeg" alt="">
+              </div>
+              <span class="card-badge" style="background:var(--clr-green-light);">Nature</span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Ella</h3>
+              <p class="card-text">
+                A highland sanctuary of misty hills, lush tea plantations, and the iconic Nine Arch Bridge.
+                Hike to breathtaking viewpoints and arrive on the world's most scenic train journey.
+              </p>
+              <div class="card-footer-row">
+                <span style="font-size:var(--fs-xs); color:var(--clr-text-light);">
+                  <i class="fas fa-map-marker-alt" aria-hidden="true"></i> Uva Province
+                </span>
+                <a href="destinations.html" class="btn btn-primary btn-sm">Learn More</a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="text-center" style="margin-top: var(--space-2xl);">
+          <a href="destinations.html" class="btn btn-outline">
+            View All 8 Destinations <i class="fas fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         STATISTICS ROW
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="section-pad bg-green text-white" aria-label="Sri Lanka facts and figures">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow text-gold">Why Sri Lanka?</span>
+          <h2 style="color:white;">An Island That Has Everything</h2>
+          <div class="section-divider" aria-hidden="true"></div>
+        </div>
+        <div class="stat-row reveal">
+          <div class="stat-item">
+            <i class="fas fa-landmark" aria-hidden="true"></i>
+            <span class="stat-num">8</span>
+            <span class="stat-label">UNESCO World Heritage Sites</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-water" aria-hidden="true"></i>
+            <span class="stat-num">1,600km</span>
+            <span class="stat-label">of Pristine Coastline</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-leaf" aria-hidden="true"></i>
+            <span class="stat-num">26</span>
+            <span class="stat-label">National Parks &amp; Reserves</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-mug-hot" aria-hidden="true"></i>
+            <span class="stat-num">150+</span>
+            <span class="stat-label">Years of Tea Heritage</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         FEATURES / HIGHLIGHTS GRID
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="section-pad" aria-labelledby="features-heading">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="eyebrow">What We Offer</span>
+          <h2 id="features-heading">Your Complete Sri Lanka Guide</h2>
+          <div class="section-divider" aria-hidden="true"></div>
+          <p>Everything you need to plan the perfect Sri Lankan adventure, all in one place.</p>
+        </div>
+
+        <div class="feature-icons reveal">
+          <div class="feature-icon-item">
+            <i class="fas fa-map" aria-hidden="true"></i>
+            <h4>8 Destinations</h4>
+            <p>Detailed guides to Sri Lanka's finest cities, beaches, heritage sites, and natural wonders.</p>
+          </div>
+          <div class="feature-icon-item">
+            <i class="fas fa-utensils" aria-hidden="true"></i>
+            <h4>Culture &amp; Food</h4>
+            <p>Deep dives into festivals, traditions, cuisine, and the legendary warmth of Sri Lankan hospitality.</p>
+          </div>
+          <div class="feature-icon-item">
+            <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+            <h4>Trip Planner</h4>
+            <p>Build your personalised itinerary in minutes with our interactive trip planning tool.</p>
+          </div>
+          <div class="feature-icon-item">
+            <i class="fas fa-headset" aria-hidden="true"></i>
+            <h4>Get in Touch</h4>
+            <p>Have questions? Reach our travel experts via our contact form and FAQ centre.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
+         CALL TO ACTION BANNER
+         ═══════════════════════════════════════════════════════════ -->
+    <section class="section-pad bg-beige" aria-label="Call to action – Start planning">
+      <div class="container text-center">
+        <div class="reveal" style="max-width:680px; margin-inline:auto;">
+          <span class="eyebrow">Ready to Explore?</span>
+          <h2>Your Sri Lankan Adventure Awaits</h2>
+          <div class="section-divider" aria-hidden="true"></div>
+          <p style="color:var(--clr-text-light); margin-bottom:var(--space-xl);">
+            Use our interactive trip planner to build a personalised itinerary tailored to your interests,
+            duration, and budget — then pack your bags and discover the Pearl of the Indian Ocean.
+          </p>
+          <div style="display:flex; gap:var(--space-md); justify-content:center; flex-wrap:wrap;">
+            <a href="travel-planner.html" class="btn btn-primary">
+              <i class="fas fa-route" aria-hidden="true"></i> Plan Your Trip
+            </a>
+            <a href="culture-food.html" class="btn btn-outline">
+              <i class="fas fa-book-open" aria-hidden="true"></i> Explore Culture &amp; Food
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SITE FOOTER
+       ═══════════════════════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            Explore Sri Lanka
+            <span>Travel &amp; Culture Guide</span>
+          </a>
+          <p>Your premium digital companion for discovering the extraordinary beauty, culture, and destinations of the Pearl of the Indian Ocean.</p>
+          <div class="social-links" aria-label="Social media links">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Twitter / X"><i class="fab fa-x-twitter" aria-hidden="true"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="destinations.html">Destinations</a></li>
+            <li><a href="culture-food.html">Culture &amp; Food</a></li>
+            <li><a href="travel-planner.html">Plan Your Trip</a></li>
+            <li><a href="contact.html">Contact &amp; FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Destinations -->
+        <div class="footer-col">
+          <h4>Top Destinations</h4>
+          <ul>
+            <li><a href="destinations.html">Colombo</a></li>
+            <li><a href="destinations.html">Kandy</a></li>
+            <li><a href="destinations.html">Galle</a></li>
+            <li><a href="destinations.html">Sigiriya</a></li>
+            <li><a href="destinations.html">Mirissa</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Explore Sri Lanka – Travel &amp; Culture Guide. All rights reserved.
+          &nbsp;|&nbsp; Designed for educational purposes.
+          &nbsp;|&nbsp; Content is original student work.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" aria-label="Back to top">
+    <i class="fas fa-chevron-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- jQuery (CDN) -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+          integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+          crossorigin="anonymous"></script>
+
+  <!-- Project Scripts -->
+  <script src="js/script.js"></script>
+  <script src="js/jquery-effects.js"></script>
+
+</body>
+</html>
